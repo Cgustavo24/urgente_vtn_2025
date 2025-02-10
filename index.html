@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi Valentín?</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: pink;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 100px;
+        }
+        .valentine-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        select, button {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="valentine-box">
+            <h1>¿Quieres ser mi Valentín? 💖</h1>
+            <select id="valentineSelect" onchange="checkSelection()">
+                <option value="">Elige una opción</option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+            <p id="message"></p>
+        </div>
+    </div>
+
+    <script>
+        function checkSelection() {
+            let select = document.getElementById("valentineSelect");
+            let message = document.getElementById("message");
+            
+            if (select.value === "si") {
+                message.innerHTML = "💘 ¡Sabía que dirías que sí! 💘";
+            } else if (select.value === "no") {
+                alert("¡No puedes decir que no! 😡");
+                select.value = "si";
+                message.innerHTML = "💘 ¡Sabía que cambiarías de opinión! 💘";
+            }
+        }
+    </script>
+</body>
+</html>
