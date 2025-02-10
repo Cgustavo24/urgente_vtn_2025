@@ -24,6 +24,13 @@
             font-size: 18px;
             margin-top: 10px;
         }
+        .hidden {
+            display: none;
+        }
+        .emoji {
+            font-size: 50px;
+            transition: transform 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -36,6 +43,10 @@
                 <option value="no">No</option>
             </select>
             <p id="message"></p>
+            <div id="hiddenContent" class="hidden">
+                <p>🎉 ¡Me haces la persona más feliz del mundo! 🎉</p>
+                <p class="emoji">😍💘🥰</p>
+            </div>
         </div>
     </div>
 
@@ -43,13 +54,16 @@
         function checkSelection() {
             let select = document.getElementById("valentineSelect");
             let message = document.getElementById("message");
+            let hiddenContent = document.getElementById("hiddenContent");
             
             if (select.value === "si") {
                 message.innerHTML = "💘 ¡Sabía que dirías que sí! 💘";
+                hiddenContent.classList.remove("hidden");
             } else if (select.value === "no") {
                 alert("¡No puedes decir que no! 😡");
                 select.value = "si";
                 message.innerHTML = "💘 ¡Sabía que cambiarías de opinión! 💘";
+                hiddenContent.classList.remove("hidden");
             }
         }
     </script>
