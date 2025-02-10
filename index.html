@@ -7,18 +7,26 @@
     <style>
         body {
             text-align: center;
-            background-color: pink;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
             font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
         }
         .container {
-            margin-top: 100px;
+            position: relative;
+            z-index: 10;
         }
         .valentine-box {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
             display: inline-block;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
         }
         select, button {
             font-size: 18px;
@@ -31,13 +39,27 @@
             font-size: 50px;
             transition: transform 0.3s;
         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: floatUp 4s infinite ease-in-out;
+        }
+        @keyframes floatUp {
+            from { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            to { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="valentine-box">
             <h1>¿Quieres ser mi Valentín? 💖</h1>
-            <select id="valentineSelect" onchange="checkSelection()">
+            <select id="valentineSelect">
                 <option value="">Elige una opción</option>
                 <option value="si">Sí</option>
                 <option value="no">No</option>
@@ -51,8 +73,8 @@
     </div>
 
     <script>
-        function checkSelection() {
-            let select = document.getElementById("valentineSelect");
+        document.getElementById("valentineSelect").addEventListener("change", function() {
+            let select = this;
             let message = document.getElementById("message");
             let hiddenContent = document.getElementById("hiddenContent");
             
@@ -65,7 +87,19 @@
                 message.innerHTML = "💘 ¡Sabía que cambiarías de opinión! 💘";
                 hiddenContent.classList.remove("hidden");
             }
+        });
+
+        function createHeart() {
+            let heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 4000);
         }
+
+        setInterval(createHeart, 700);
     </script>
 </body>
 </html>
